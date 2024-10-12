@@ -1,0 +1,49 @@
+#include <iostream>
+#include <cmath>
+
+double cos_approx(double x) {
+    return 1 - (x * x) / 2 + (x * x * x * x) / 24;
+}
+
+double sin_approx(double x) {
+    return x - (x * x * x) / 6 + (x * x * x * x * x) / 120;
+}
+
+double tan_approx(double x) {
+    return x + (x * x * x) / 3 + (2 * x * x * x * x * x) / 15;
+}
+
+int main ()
+{
+    double x;
+    std::cout << "Entrez une valeur en radian : " << std::endl;
+    std::cin >> x;
+
+    if (x > 6.28) // 6.28 = 2 * pi donc si x est superieur a 6.28 il s'agit problable d'une valeur en degres
+    {
+        std::cout << "Erreur : la valeur saisie semble etre en degres, entrez une valeur en radians" << std::endl;
+        return 1; // Quitte le programme avec un code erreur
+    }
+
+    double cos_ap = cos_approx(x);
+    double sin_ap = sin_approx(x);
+    double tan_ap = tan_approx(x);
+
+    //calcul des vraies valeurs
+    double cos_real = cos(x);
+    double sin_real = sin(x);
+    double tan_real = tan(x);
+
+    std::cout <<"\nApproximations avec le developpement limte : " << std::endl; // le \n au debut permet que ca ne soit pas cooler a ligne precedente
+    std::cout << "cos(" << x << ") = " << cos_ap  << std::endl; 
+    std::cout << "sin(" << x << ") = " << sin_ap  << std::endl; 
+    std::cout << "tan(" << x << ") = " << tan_ap  << std::endl;
+
+    std::cout << "valeurs reelles (calculees avec la bibliotheque mathematiques) "<< std::endl;
+    std::cout << "cos(" << x << ") = " << cos_real  << std::endl;
+    std::cout << "sin(" << x << ") = " << sin_real << std::endl;
+    std::cout << "tan(" << x << ") = " << tan_real  << std::endl;
+
+    return 0;
+
+}
